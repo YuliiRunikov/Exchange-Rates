@@ -6,7 +6,7 @@ use \GuzzleHttp\Client;
 
 class EntityFixer extends EntityAbstract {
 
-  private $phones=[];
+  public $phones=[];
 
   private function getContact($endpoint, $userId, $token, $id) {
     $ENDPOINT_TEMPLATE = '%s/%s/%s/crm.%s.get.json?ID=%s';
@@ -38,7 +38,7 @@ class EntityFixer extends EntityAbstract {
 
   private function fixPhones() {
     foreach($this->phones as & $phone) {
-      $phone = preg_replace('/^\+?380/ius', '0', $phone);
+      $phone = preg_replace('/^(\+380|380|80)/ius', '0', $phone);
     }
   }
 
